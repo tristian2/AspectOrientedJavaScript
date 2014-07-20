@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationRestLog", "WebApplicationRestLog\WebApplicationRestLog.csproj", "{8DDB2DA7-5751-457E-AE80-E404A8A3E532}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationRestLog.Tests", "WebApplicationRestLog.Tests\WebApplicationRestLog.Tests.csproj", "{11435976-DDA9-43E2-B7BB-CDFA6D406BA3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishScripts", "PublishScripts", "{17596092-8DA4-4BB4-9F85-282902C4ABA6}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\AzureWebAppPublishModule.psm1 = PublishScripts\AzureWebAppPublishModule.psm1
+		PublishScripts\Publish-WebApplication.ps1 = PublishScripts\Publish-WebApplication.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configurations", "{1BD3C719-F850-4B0B-B33E-5DFD57FB1DCA}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Configurations\WebApplicationRestLog-WAWS-dev.json = PublishScripts\Configurations\WebApplicationRestLog-WAWS-dev.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tristian2.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = WebApplicationRestLog.Tests\\WebApplicationRestLog.Tests.csproj
+		SccProjectName1 = WebApplicationRestLog.Tests
+		SccLocalPath1 = WebApplicationRestLog.Tests
+		SccProjectUniqueName2 = WebApplicationRestLog\\WebApplicationRestLog.csproj
+		SccProjectName2 = WebApplicationRestLog
+		SccLocalPath2 = WebApplicationRestLog
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8DDB2DA7-5751-457E-AE80-E404A8A3E532}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DDB2DA7-5751-457E-AE80-E404A8A3E532}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DDB2DA7-5751-457E-AE80-E404A8A3E532}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DDB2DA7-5751-457E-AE80-E404A8A3E532}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11435976-DDA9-43E2-B7BB-CDFA6D406BA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11435976-DDA9-43E2-B7BB-CDFA6D406BA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11435976-DDA9-43E2-B7BB-CDFA6D406BA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11435976-DDA9-43E2-B7BB-CDFA6D406BA3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1BD3C719-F850-4B0B-B33E-5DFD57FB1DCA} = {17596092-8DA4-4BB4-9F85-282902C4ABA6}
+	EndGlobalSection
+EndGlobal
