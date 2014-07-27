@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogService", "LogService\LogService.csproj", "{789650A8-0C7D-425D-B0EF-52FC04F7E421}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishScripts", "PublishScripts", "{CDAA209F-B406-424E-82D3-2F7A8A995EFE}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\AzureWebsitePublishModule.psm1 = PublishScripts\AzureWebsitePublishModule.psm1
+		PublishScripts\Publish-WebApplicationWebsite.ps1 = PublishScripts\Publish-WebApplicationWebsite.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configurations", "{C007C08E-7152-4E57-A13A-6147519863B8}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Configurations\LogService-WAWS-dev.json = PublishScripts\Configurations\LogService-WAWS-dev.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tristian2.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = LogService\\LogService.csproj
+		SccProjectName1 = LogService
+		SccLocalPath1 = LogService
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{789650A8-0C7D-425D-B0EF-52FC04F7E421}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{789650A8-0C7D-425D-B0EF-52FC04F7E421}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{789650A8-0C7D-425D-B0EF-52FC04F7E421}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{789650A8-0C7D-425D-B0EF-52FC04F7E421}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C007C08E-7152-4E57-A13A-6147519863B8} = {CDAA209F-B406-424E-82D3-2F7A8A995EFE}
+	EndGlobalSection
+EndGlobal
