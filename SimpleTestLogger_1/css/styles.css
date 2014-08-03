@@ -1,0 +1,55 @@
+﻿/*
+*
+* basic css including the moviestars to support ratings
+*
+*/
+
+body {
+
+}
+.formRow {
+width:800px;
+clear:both;
+}
+.formHeading {
+float:left;
+width:112px;
+}
+.formElement {
+float:left;
+width:112px;
+}
+
+.ratingImg {	
+position:absolute;
+
+}
+.ratingCell {
+    padding-bottom: 22px;
+    padding-left: 3px;
+    position: inherit;
+    width: 102px;
+   }
+
+#queryForm{
+padding-bottom:20px;
+}
+
+.formButton {
+width:38px;
+margin-left:auto;
+margin-right:0px;
+}
+.fractionvalue {
+display:none;
+}
+#movietable {
+width: 1065px;
+}
+
+.filter {
+display:none;
+}
+#instruction {
+font-style:italic;
+}

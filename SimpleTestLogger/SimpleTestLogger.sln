@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SimpleTestLogger", "http://localhost:49193", "{479B1333-E994-4D5E-90B0-59F83CEDEA7B}"
+	ProjectSection(WebsiteProperties) = preProject
+		SccProjectName = "SAK"
+		SccAuxPath = "SAK"
+		SccLocalPath = "SAK"
+		SccProvider = "SAK"
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_49193"
+		Debug.AspNetCompiler.PhysicalPath = "..\..\..\..\Source\Workspaces\MSC\SimpleTestLogger\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_49193\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_49193"
+		Release.AspNetCompiler.PhysicalPath = "..\..\..\..\Source\Workspaces\MSC\SimpleTestLogger\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_49193\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "..\..\..\..\Source\Workspaces\MSC\SimpleTestLogger\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9D15F100-FC2D-4DD6-B5EF-7F37A6F9BB1B}"
+	ProjectSection(SolutionItems) = preProject
+		logextension.debug.js = logextension.debug.js
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tristian2.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccWebProject1 = true
+		SccProjectUniqueName1 = http://localhost:49193
+		SccProjectName1 = ../SimpleTestLogger_1
+		SccLocalPath1 = ..\\..\\..\\..\\Source\\Workspaces\\MSC\\SimpleTestLogger
+		SccProjectEnlistmentChoice1 = 2
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{479B1333-E994-4D5E-90B0-59F83CEDEA7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{479B1333-E994-4D5E-90B0-59F83CEDEA7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

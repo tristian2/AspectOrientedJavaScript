@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>test logger</title>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+
+        function OnCreateDisplay() {
+            $('#DisplayInfoLoader').html('<span style="color: orange;">Creating object....</span>');
+            $('#DisplayInfoLoader').fadeIn(1000);
+
+            var url = "http://logservice.azurewebsites.net/Logs"
+            var r = new Object();
+         
+            r.Date = "13/08/1974";
+            r.Time = "12:04:00";
+            r.Type = "logic";
+            r.IP = "12.12.12.12";
+            r.Error = "oh dear gone pear shaped!";
+            jr = JSON.stringify(r);
+            console.log(jr);
+            $('#DisplayInfoLoader').html(jr);
+            debugger;
+            /*$.ajax({
+                type: "POST",
+                url: url,
+                data: jr,
+                contentType: "application/json; charset=utf-8",
+                success: function (data, textStatus, XMLHttpRequest) {
+                    console.log("success:" + textStatus);
+                    $('#DisplayInfoLoader').html('<span style="color: green;">Display created....</span>');
+                    //$('#DisplayInfoLoader').fadeOut(3000);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("error:" + xhr.responseText + xhr.status);
+                    $('#error').html(xhr.responseText);
+                   // $('#DisplayInfoLoader').fadeOut(3000);
+                }
+            });*/
+
+            $.post(url, r);
+
+            return false;
+        }
+        
+    </script>
+</head>
+<body onload="OnCreateDisplay()">
+    <div id="DisplayInfoLoader"></div>
+    <div id="error"></div>
+</body>
+</html>
