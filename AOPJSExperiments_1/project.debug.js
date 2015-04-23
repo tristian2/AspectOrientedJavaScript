@@ -1177,8 +1177,12 @@ Acme.Tools.HumanResources.functionThree = function ($) {
     //blah
 }();
 
+var firstRun = true;
 function BBKAOP_getAllFunctions(object) {
-    //console.log('callee:' + arguments.callee.toString());
+    if (firstRun) {
+        objectPath = "this"; //this is hardoded  will need to change perhaps
+        firstRun = false;
+    }
 
     var thisFunctionName = arguments.callee.toString().match(/function ([^\(]+)/)[1];
     //console.log('thisFunctionName:' + thisFunctionName);
@@ -1192,7 +1196,13 @@ function BBKAOP_getAllFunctions(object) {
             var toClass = {}.toString;
 
             if (typeof (object[id]) == "function") {
-                var isThisFunction = object[id].toString().match(/function ([^\(]+)/)[1] == thisFunctionName;
+                var isThisFunction = '';
+                try {
+                    isThisFunction = object[id].toString().match(/function ([^\(]+)/)[1] == thisFunctionName;
+                }
+                catch(err){
+                    isThisFunction = 'no';
+                }
                 var regex = /\[native code\]/.test(object[id].toSource().toString());
                 if (!regex && !isThisFunction) {
                     var isThisFunction = object[id].toString().match(/function ([^\(]+)/)[1] == thisFunctionName;
@@ -1206,8 +1216,12 @@ function BBKAOP_getAllFunctions(object) {
             // for namespaced functions, we could user recursion here?
             //need to filter out internal stuff though
             if (toClass.call(object[id]) == "[object Object]") {
-                debugger;
-                BBKAOP_getAllFunctions(object);
+                //debugger;
+                objectPath = objectPath + '.' + id;
+                //BBKAOP_getAllFunctions(object);
+                //BBKAOP_getAllFunctions(id);                
+                BBKAOP_getAllFunctions(eval(objectPath)); //!!!eval!
+                objectPath=objectPath.slice(0, objectPath.lastIndexOf('.'));
             }
         }
         catch (err) {
