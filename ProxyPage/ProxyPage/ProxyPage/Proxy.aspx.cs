@@ -12,12 +12,19 @@ namespace ProxyPage
     {
         protected override void OnInit(EventArgs e)
         {
-            this.ProcessProxyRequest();
+            //roll the dice for a broken response - causing mayhem and some interesting logs!
+            if (BrokenRespose())
+            {
+                return;
+            }
+            else
+            {
+                this.ProcessProxyRequest();
+            }
         }
         protected void ProcessProxyRequest()
         {
-            //roll the dice for a broken response - causing mayhem and some interesting logs!
-            BrokenRespose();
+
 
             string queryStringURI = string.Empty;
             string queryStringMode = string.Empty;
@@ -114,8 +121,9 @@ namespace ProxyPage
             }
             //this.ThrowSharePointError("Mimecast TK Proxy: 02 - No URL provided.");
         }
-        private void BrokenRespose()
+        private bool BrokenRespose()
         {
+            var brokenResponse = false;
             Random rnd = new Random();
             int dice = rnd.Next(1, 3);
 
@@ -130,9 +138,10 @@ namespace ProxyPage
                 catch (HttpResponseException hex)
                 {
                     base.Response.Write(hex.Response);
-                    return;
+                    brokenResponse = true;
                 }
             }
+            return brokenResponse;
         }
     }
 }
