@@ -1,8 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Net.Security;
 using System.Web;
+using System.Web.Http;
 
 namespace ProxyPage
 {
@@ -12,8 +14,11 @@ namespace ProxyPage
         {
             this.ProcessProxyRequest();
         }
-         protected void ProcessProxyRequest()
-        {            
+        protected void ProcessProxyRequest()
+        {
+            //roll the dice for a broken response - causing mayhem and some interesting logs!
+            BrokenRespose();
+
             string queryStringURI = string.Empty;
             string queryStringMode = string.Empty;
             try
@@ -38,6 +43,7 @@ namespace ProxyPage
 
             if (!string.IsNullOrEmpty(queryStringMode))
             {
+
                 //implement the restful mode to nestsuite - only GET at this point
                 try
                 {
@@ -63,6 +69,7 @@ namespace ProxyPage
                     base.Response.Clear();
                     base.Response.ContentType = contentType;
                     base.Response.Write(streamReader.ReadToEnd());
+                    base.Response.StatusCode = 500;
                     base.Response.Flush();
                 }
                 catch (Exception ex)
@@ -106,6 +113,26 @@ namespace ProxyPage
                 return;
             }
             //this.ThrowSharePointError("Mimecast TK Proxy: 02 - No URL provided.");
+        }
+        private void BrokenRespose()
+        {
+            Random rnd = new Random();
+            int dice = rnd.Next(1, 3);
+
+            if (dice % 2 != 0)
+            {
+                //wann invoke an error delibrately
+                try
+                {
+                    var notFoundResponse = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                    throw new HttpResponseException(notFoundResponse);
+                }
+                catch (HttpResponseException hex)
+                {
+                    base.Response.Write(hex.Response);
+                    return;
+                }
+            }
         }
     }
 }
