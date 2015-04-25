@@ -1139,6 +1139,9 @@ Acme.Tools.HumanResources.ProcessLeaveCancellation = function (leaveId, spProxyP
 (function () { console.log('closure 2') })(); //??? how to advise - especially before it is executed?
 (function () { console.log('closure 3') })(); //??? how to advise - especially before it is executed?
 
+function aGlobalOne() {
+    //some code
+}
 Acme.Tools.HumanResources.functionOne = function ($) {
     //blah
 }();
@@ -1175,6 +1178,8 @@ Acme.Tools.HumanResources.WeatherByCity = function (city) {
 
 Acme.Tools.HumanResources.functionThree = function ($) {
     //blah
+    //this wont work - so how to get the function name in this case? var thisFunctionName = arguments.callee.toString().match(/function ([^\(]+)/)[1];
+    //console.log('in ' + thisFunctionName);
 }();
 
 var firstRun = true;
@@ -1188,29 +1193,34 @@ function BBKAOP_getAllFunctions(object) {
     //console.log('thisFunctionName:' + thisFunctionName);
     var resultArray = [];
     for (var id in object) {
-        //console.log('id:' + id.toString());
-        //console.log('object:' + object.toString());
+        if (['this.chrome', 'this.external','this.Intl','this.a','$'].indexOf(objectPath) > -1)
+            continue;
+        /*console.log('id:' + id.toString());
+        console.log('object:' + object.toString());
+        console.log('objectpath:' + objectPath.toString());*/
         try {
 
             //for the second part we need to eschew anything other than custom objects or we will overwhelm th e browser with deep recursion potentially crashing it
             var toClass = {}.toString;
 
             if (typeof (object[id]) == "function") {
-                var isThisFunction = '';
+                var isThisFunction = false;
                 try {
                     isThisFunction = object[id].toString().match(/function ([^\(]+)/)[1] == thisFunctionName;
                 }
                 catch(err){
-                    isThisFunction = 'no';
+                    isThisFunction = false;
                 }
-                var regex = /\[native code\]/.test(object[id].toSource().toString());
+                //var regex = /\[native code\]/.test(object[id].toSource().toString());
+                var regex = /\[native code\]/.test(object[id].toString());
                 if (!regex && !isThisFunction) {
-                    var isThisFunction = object[id].toString().match(/function ([^\(]+)/)[1] == thisFunctionName;
+                    /*var isThisFunction = object[id].toString().match(/function ([^\(]+)/)[1] == thisFunctionName;
                     console.log('regex' + regex);
                     console.log('isitme:' + (object[id].toString().match(/function ([^\(]+)/)[1] == thisFunctionName));
                     console.log('function:' + object[id].toString().match(/function ([^\(]+)/)[1]);
-                    console.log(isThisFunction);
-                    resultArray.push(id + ": " + object[id].toSource());
+                    console.log(isThisFunction);*/
+                    console.log(object[id].toString());
+                    //resultArray.push(id + ": " + object[id].toString());
                 }
             }
             // for namespaced functions, we could user recursion here?
@@ -1225,11 +1235,11 @@ function BBKAOP_getAllFunctions(object) {
             }
         }
         catch (err) {
-            console.log(err.message);
-            resultArray.push("WARNING!!  " + id + ": this function is inaccessible");
+            //console.log(err.message);
+            //resultArray.push("WARNING!!  " + id + ": this function is inaccessible");
         }
     }
-    return resultArray;
+    return;//resultArray;
 }
 var a = BBKAOP_getAllFunctions(this);
 console.log(BBKAOP_getAllFunctions(this).join("\n\n***************************************************************************************************\n\n"));
@@ -1237,4 +1247,5 @@ console.log(BBKAOP_getAllFunctions(this).join("\n\n*****************************
 //console.log(BBKAOP_getAllFunctions(Acme.Tools.Global).join("\n\n***************************************************************************************************\n\n"));
 //console.log('\n\n****Acme.Tools.HumanResources namespace*****\n\n');/
 //console.log(BBKAOP_getAllFunctions(Acme.Tools.HumanResources).join("\n\n***************************************************************************************************\n\n"));
-
+console.log('finished');
+Acme.Tools.HumanResources.functionThree();
