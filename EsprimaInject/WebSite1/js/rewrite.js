@@ -1,4 +1,8 @@
-﻿function sourceRewrite() {
+﻿//Documentation on using Esprima http://esprima.org/doc/index.html#ast
+
+//todo modularise the code so that we can target specific modules!!
+//also modulatrise the sample! use the module pattern http://addyosmani.com/resources/essentialjsdesignpatterns/book/
+    function sourceRewrite() {
     'use strict';
 
     var code, syntax, indent, quotes, option;
@@ -17,8 +21,8 @@
     code += "function doit() {";
     code += "    console.log(\'in function\');";
     code += "    try {";
-    //code += "        var n = 50/0;";
-    code += "        throw new UserException(\'InvalidMonthNo\');";
+    code += "        var n = 50/0;";
+    code += "        throw new UserException(\'InvalidMonthNo\');";   //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/throw
     code += "        console.log(\'in try\');";
     code += "    } catch (e) {";
     code += "        console.log(e);";
@@ -30,6 +34,7 @@
     code += "function end() {";
     code += "    console.log(\'after advice\');";
     code += "}";
+    code += "doit();";
     
     indent = '\t';
     quotes = 'auto';
@@ -48,8 +53,8 @@
         syntax = window.esprima.parse(code, { raw: true, tokens: true, range: true, comment: true });
         syntax = window.escodegen.attachComments(syntax, syntax.comments, syntax.tokens);
         //advice to the entire code
-        //syntax.body.unshift(esprima.parse('start()'))
-        //syntax.body.push(esprima.parse('end()'))
+        syntax.body.unshift(esprima.parse('start()'))  //Parsing and modifying Javascript code with Esprima and Escodegen http://www.mattzeunert.com/2013/12/30/parsing-and-modifying-Javascript-code-with-esprima-and-escodegen.html
+        syntax.body.push(esprima.parse('end()'))
 
         //code = window.escodegen.generate(syntax, option);
         //console.log(code);
@@ -63,6 +68,7 @@
 
 
     //now recursively traverse JSON structure travesral code...
+    //http://stackoverflow.com/questions/2549320/looping-through-an-object-tree-recursively
     function traverse(obj) {
         var ids = [];
         for (var prop in obj) {
@@ -71,11 +77,11 @@
             if (typeof obj[prop] == "object" && obj[prop]) {
                 
                 console.log(obj.type);
-                if (obj.type === 'CatchClause') {
+                if (obj.type === 'CatchClause') {  //worked out using the parse tree from http://esprima.org/demo/parse.html and the resultamt AST
                     //debugger;
                     //now inject the code 
-                    obj.body.body.unshift(esprima.parse('start()'))
-                    obj.body.body.push(esprima.parse('end()'))
+                    obj.body.body.unshift(esprima.parse('start();'))
+                    obj.body.body.push(esprima.parse('end();'))
                 }
 
           /*      if (prop.type == 'CatchClause') {
