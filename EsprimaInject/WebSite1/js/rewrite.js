@@ -2,6 +2,30 @@
 
 //todo modularise the code so that we can target specific modules!!
 //also modulatrise the sample! use the module pattern http://addyosmani.com/resources/essentialjsdesignpatterns/book/
+
+
+function start() {
+    console.log('before advice');
+}
+function end() {
+    console.log('after advice');
+}
+function doit() {
+    console.log('in function');
+    try {
+        var n = 50/0;
+        throw new UserException('InvalidMonthNo');   //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/throw
+        console.log('in try');
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+
+function UserException(message) {
+    this.message = message;
+    this.name = 'UserException';
+}
     function sourceRewrite() {
     'use strict';
 
@@ -52,7 +76,8 @@
     try {
         //syntax = window.esprima.parse(code, { raw: true, tokens: true, range: true, comment: true });
         debugger;
-        syntax = window.esprima.parse(String(window.sourceRewrite), { raw: true, tokens: true, range: true, comment: true });   //get the source of the functions to be decorated into a string
+        //syntax = window.esprima.parse(String(window.sourceRewrite), { raw: true, tokens: true, range: true, comment: true });   //get the source of the functions to be decorated into a string
+        syntax = window.esprima.parse(String(window.doit), { raw: true, tokens: true, range: true, comment: true });   //get the source of the functions to be decorated into a string
         syntax = window.escodegen.attachComments(syntax, syntax.comments, syntax.tokens);
         //advice to the entire code
         syntax.body.unshift(esprima.parse('start()'))  //Parsing and modifying Javascript code with Esprima and Escodegen http://www.mattzeunert.com/2013/12/30/parsing-and-modifying-Javascript-code-with-esprima-and-escodegen.html
@@ -64,8 +89,9 @@
         code = window.escodegen.generate(syntax, option);
         console.log(code);
         eval(code);
+        throw new UserException('TestExceptionException');
     } catch (e) {
-        console.log(e.toString());
+        console.log(e.message.toString());
     }
 
 
