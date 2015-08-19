@@ -50,7 +50,9 @@
     };
 
     try {
-        syntax = window.esprima.parse(code, { raw: true, tokens: true, range: true, comment: true });
+        //syntax = window.esprima.parse(code, { raw: true, tokens: true, range: true, comment: true });
+        debugger;
+        syntax = window.esprima.parse(String(window.sourceRewrite), { raw: true, tokens: true, range: true, comment: true });   //get the source of the functions to be decorated into a string
         syntax = window.escodegen.attachComments(syntax, syntax.comments, syntax.tokens);
         //advice to the entire code
         syntax.body.unshift(esprima.parse('start()'))  //Parsing and modifying Javascript code with Esprima and Escodegen http://www.mattzeunert.com/2013/12/30/parsing-and-modifying-Javascript-code-with-esprima-and-escodegen.html
