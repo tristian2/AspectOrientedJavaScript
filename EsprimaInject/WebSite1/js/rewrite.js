@@ -11,7 +11,7 @@ function end() {
     console.log('after advice');
 }
 //function doit() {
-var doit = function () {
+var doit = function () {  //doit as a function expression
     console.log('in function');
     try {
         var n = 50 / 0;
