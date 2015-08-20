@@ -10,8 +10,7 @@ function start() {
 function end() {
     console.log('after advice');
 }
-//function doit() {
-var doit = function () {  //doit as a function expression
+function doit() {
     console.log('in function');
     try {
         var n = 50 / 0;
@@ -20,7 +19,7 @@ var doit = function () {  //doit as a function expression
     } catch (e) {
         console.log(e.message);
     }
-};
+}
 
 Function.prototype.call = function () {
     var args = Array.prototype.slice.apply(arguments, [1]);
