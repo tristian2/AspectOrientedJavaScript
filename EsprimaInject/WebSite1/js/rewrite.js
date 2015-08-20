@@ -10,16 +10,23 @@ function start() {
 function end() {
     console.log('after advice');
 }
-function doit() {
+//function doit() {
+var doit = function () {
     console.log('in function');
     try {
-        var n = 50/0;
+        var n = 50 / 0;
         throw new UserException('InvalidMonthNo');   //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/throw
         console.log('in try');
     } catch (e) {
         console.log(e.message);
     }
-}
+};
+
+Function.prototype.call = function () {
+    var args = Array.prototype.slice.apply(arguments, [1]);
+    return this.apply(arguments[0], args);
+};
+
 
 
 function UserException(message) {
@@ -75,20 +82,26 @@ function UserException(message) {
 
     try {
         //syntax = window.esprima.parse(code, { raw: true, tokens: true, range: true, comment: true });
-        debugger;
+        
         //syntax = window.esprima.parse(String(window.sourceRewrite), { raw: true, tokens: true, range: true, comment: true });   //get the source of the functions to be decorated into a string
         syntax = window.esprima.parse(String(window.doit), { raw: true, tokens: true, range: true, comment: true });   //get the source of the functions to be decorated into a string
         syntax = window.escodegen.attachComments(syntax, syntax.comments, syntax.tokens);
         //advice to the entire code
-        syntax.body.unshift(esprima.parse('start()'))  //Parsing and modifying Javascript code with Esprima and Escodegen http://www.mattzeunert.com/2013/12/30/parsing-and-modifying-Javascript-code-with-esprima-and-escodegen.html
-        syntax.body.push(esprima.parse('end()'))
+       // syntax.body.unshift(esprima.parse('start()'))  //Parsing and modifying Javascript code with Esprima and Escodegen http://www.mattzeunert.com/2013/12/30/parsing-and-modifying-Javascript-code-with-esprima-and-escodegen.html
+        //syntax.body.push(esprima.parse('end()'))
 
         //code = window.escodegen.generate(syntax, option);
         //console.log(code);
         traverse(syntax);
         code = window.escodegen.generate(syntax, option);
-        console.log(code);
+        //console.log(code);
         eval(code);
+        
+                
+        var doit = new Function(code);
+
+        
+
         throw new UserException('TestExceptionException');
     } catch (e) {
         console.log(e.message.toString());
@@ -104,7 +117,7 @@ function UserException(message) {
             //console.log(typeof obj[prop] + '    ' + prop);
             if (typeof obj[prop] == "object" && obj[prop]) {
                 
-                console.log(obj.type);
+                //console.log(obj.type);
                 if (obj.type === 'CatchClause') {  //worked out using the parse tree from http://esprima.org/demo/parse.html and the resultamt AST
                     //debugger;
                     //now inject the code 
