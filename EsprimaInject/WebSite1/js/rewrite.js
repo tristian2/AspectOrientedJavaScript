@@ -17,7 +17,7 @@ function doit() {
         throw new UserException('InvalidMonthNo');   //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/throw
         console.log('in try');
     } catch (e) {
-        console.log(e);
+        console.log(e.message);
     }
 }
 
@@ -131,9 +131,10 @@ function UserException(message) {
 
 
 }
-
+    sourceRewrite();
+    doit();
 /*jslint sloppy:true browser:true */
 /*global sourceRewrite:true */
-window.onload = function () {
+/*window.onload = function () {
     sourceRewrite();
-};
+};*/
