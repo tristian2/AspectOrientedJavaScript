@@ -3,7 +3,7 @@
 //todo modularise the code so that we can target specific modules!!
 //also modulatrise the sample! use the module pattern http://addyosmani.com/resources/essentialjsdesignpatterns/book/
 
-
+var code;
 function start() {
     console.log('before advice');
 }
@@ -33,9 +33,10 @@ function UserException(message) {
     this.name = 'UserException';
 }
     function sourceRewrite() {
-    'use strict';
+    //'use strict';
 
-    var code, syntax, indent, quotes, option;
+    //var code, syntax, indent, quotes, option;
+    var syntax, indent, quotes, option;
     /*function doit() {  
         console.log('in function');
         try {
@@ -93,14 +94,15 @@ function UserException(message) {
         //console.log(code);
         traverse(syntax);
         code = window.escodegen.generate(syntax, option);
-        //console.log(code);
+        console.log(code);
+        debugger;
         eval(code);
         
                 
-        var doit = new Function(code);
+        //var doit = new Function(code);
 
         
-
+        
         throw new UserException('TestExceptionException');
     } catch (e) {
         console.log(e.message.toString());
