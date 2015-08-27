@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Simple test of the RESTful logger</title>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+
+        function OnCreateDisplay() {
+            $('#DisplayInfoLoader').html('<span style="color: orange;">Working....</span>');
+            $('#DisplayInfoLoader').fadeIn(1000);
+
+            var url = "//logservice.azurewebsites.net/Logs"
+            var currentdate = new Date();
+            var r = new Object(); //JSON object to store logging data
+         
+            $.ajax({
+                url: '//freegeoip.net/json/', //a service to get the clients IP address
+                type: 'POST',
+                dataType: 'jsonp',  //using JSONP for cross domain access
+                success: function (location) {
+                    r.Date = currentdate;
+                    r.Time = currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds();
+                    r.Type = "logic";
+                    r.IP = location.ip;
+                    r.Error = "oh dear gone pear shaped!";
+                    jr = JSON.stringify(r);
+                    console.log(jr);
+                    $('#DisplayInfoLoader').html(jr);                   
+                    $.post(url, r);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    debugger;
+                    console.log("error:" + xhr.responseText + xhr.status);
+                    $('#error').html(xhr.responseText);
+                    $('#DisplayInfoLoader').fadeOut(3000);
+                }
+            });
+            return false;
+        }
+        
+    </script>
+</head>
+<body onload="OnCreateDisplay()">
+    <h1>This tests the RESTful logger</h1>
+    <h2>sending details to the logger service including IP address</h2>
+    <div id="DisplayInfoLoader"></div>
+    <div id="error"></div>
+</body>
+</html>
