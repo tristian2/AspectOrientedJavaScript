@@ -25,32 +25,31 @@
     code += "        throw new UserException(\'InvalidMonthNo\');";   //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/throw
     code += "        console.log(\'in try\');";
     code += "    } catch (e) {";
-    code += "        console.log(e);";
+    code += "        console.log(e.message);";
     code += "    }";
     code += "}";
-    code += "function start() {";
+    code += "function start(message) {";
     code += "    console.log(\'before advice\');";
     code += "    var url = \"\/\/logservice.azurewebsites.net\/Logs\";";
     code += "    var currentdate = new Date();";
-    code += "    var r = new Object(); \/\/JSON object to store logging data";
+    code += "    var r = new Object(); ";
 
     code += "    $.ajax({";
-    code += "        url: \'\/\/freegeoip.net\/json\/', \/\/a service to get the clients IP address";
+    code += "        url: \'\/\/freegeoip.net\/json\/', ";
     code += "        type: \'POST\',";
-    code += "        dataType: 'jsonp',  \/\/using JSONP for cross domain access";
+    code += "        dataType: 'jsonp', ";
     code += "        success: function (location) {";
     code += "            r.Date = currentdate;";
     code += "            r.Time = currentdate.getHours() + \":\" + currentdate.getMinutes() + \":\" + currentdate.getSeconds();";
     code += "            r.Type = \"logic\";";
     code += "            r.IP = location.ip;";
-    code += "            r.Error = \"oh dear gone pear shaped!\";";
-    code += "            jr = JSON.stringify(r);";
+    code += "            r.Error = message;";
+    code += "            var jr = JSON.stringify(r);";
     code += "            console.log(jr);";
     code += "            $(\'#DisplayInfoLoader\').html(jr);";
     code += "            $.post(url, r);";
     code += "        },";
     code += "        error: function (xhr, ajaxOptions, thrownError) {";
-    code += "            debugger;";
     code += "            console.log(\"error:\" + xhr.responseText + xhr.status);";
     code += "            $(\'#error\').html(xhr.responseText);";
     code += "            $(\'#DisplayInfoLoader\').fadeOut(3000);";
@@ -106,11 +105,11 @@
             //console.log(typeof obj[prop] + '    ' + prop);
             if (typeof obj[prop] == "object" && obj[prop]) {
                 
-                console.log(obj.type);
+                //console.log(obj.type);
                 if (obj.type === 'CatchClause') {  //worked out using the parse tree from http://esprima.org/demo/parse.html and the resultamt AST
                     //debugger;
                     //now inject the code 
-                    obj.body.body.unshift(esprima.parse('start();'))
+                    obj.body.body.unshift(esprima.parse('start(e.message);'))
                     obj.body.body.push(esprima.parse('end();'))
                 }
 
