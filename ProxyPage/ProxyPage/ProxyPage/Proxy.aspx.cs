@@ -61,14 +61,14 @@ namespace ProxyPage
                     HttpWebResponse httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                     if (!(httpWebResponse.StatusCode.ToString().ToLower() == "ok"))
                     {
-                        //this.ThrowSharePointError("Mimecast TK Proxy (REST mode): 02 - Error retrieving specified URL.");
+                        //this.ThrowSharePointError("Acme TK Proxy (REST mode): 02 - Error retrieving specified URL.");
                         return;
                     }
                     string contentType = httpWebResponse.ContentType;
                     Stream responseStream = httpWebResponse.GetResponseStream();
                     if (responseStream == null)
                     {
-                        //this.ThrowSharePointError("Mimecast TK Proxy (REST mode): 01 - Error retrieving specified URL.");
+                        //this.ThrowSharePointError("Acme TK Proxy (REST mode): 01 - Error retrieving specified URL.");
                         return;
                     }
                     StreamReader streamReader = new StreamReader(responseStream);
@@ -81,7 +81,7 @@ namespace ProxyPage
                 }
                 catch (Exception ex)
                 {
-                    base.Response.Write("Mimecast TK Proxy (REST mode): " + ex.Message);
+                    base.Response.Write("Acme TK Proxy (REST mode): " + ex.Message);
                 }
                 return;
             }
@@ -96,14 +96,14 @@ namespace ProxyPage
                     HttpWebResponse httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                     if (!(httpWebResponse.StatusCode.ToString().ToLower() == "ok"))
                     {
-                        //this.ThrowSharePointError("Mimecast TK Proxy (GET mode): 02 - Error retrieving specified URL.");
+                        //this.ThrowSharePointError("Acme TK Proxy (GET mode): 02 - Error retrieving specified URL.");
                         return;
                     }
                     string contentType = httpWebResponse.ContentType;
                     Stream responseStream = httpWebResponse.GetResponseStream();
                     if (responseStream == null)
                     {
-                        //this.ThrowSharePointError("Mimecast TK Proxy (GET mode): 01 - Error retrieving specified URL.");
+                        //this.ThrowSharePointError("Acme TK Proxy (GET mode): 01 - Error retrieving specified URL.");
                         return;
                     }
                     StreamReader streamReader = new StreamReader(responseStream);
@@ -119,7 +119,7 @@ namespace ProxyPage
                 }
                 return;
             }
-            //this.ThrowSharePointError("Mimecast TK Proxy: 02 - No URL provided.");
+            //this.ThrowSharePointError("Acme TK Proxy: 02 - No URL provided.");
         }
         private bool BrokenRespose()
         {
