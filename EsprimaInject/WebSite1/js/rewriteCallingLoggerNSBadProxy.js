@@ -21,8 +21,8 @@ Acme.Tools.HumanResources.sourceRewrite = function () {
         }
     }*/
     code = "function ConnectionException(message) {";
-    code += "this.message = message;";
-    code += "    this.name = \'UserException\';";
+    code += "    this.message = message;";
+    code += "    this.name = \'ConnectionException\';";
     code += "}";
     code += "function WeatherByCity(city, country) {";
     code += "   var url = \"\/\/brokenproxy.azurewebsites.net/Proxy.aspx?u=http:\/\/api.openweathermap.org\/data\/2.5\/weather?q=\" + city + \",\" + country;";
@@ -40,11 +40,12 @@ Acme.Tools.HumanResources.sourceRewrite = function () {
     code += "           console.log(\"Success: status:\" + xhr.status);";
     code += "       },";
     code += "       error: function (xhr, ajaxOptions, thrownError) {";
-    code += "           console.log(\"Fail: status:\" + xhr.status);";
-    code += "           throw new ConnectionException(xhr.status);";   //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/throw
+    //code += "           console.log(\"Fail: status:\" + xhr.status);";
+    code += "           throw new ConnectionException(\'Weather service not reached\');";   //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/throw
     code += "       },";
     code += "       complete: function () {";
-    code += "           console.log(\"Completed ajax call\" + xhr.status);";
+    //code += "           console.log(\"Completed ajax call\" + xhr.status);";
+    code += "           console.log(\"Completed ajax call\");";
     code += "       }";
     code += "    });"; 
     code += "    } catch (e) {";
