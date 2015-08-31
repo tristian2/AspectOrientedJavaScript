@@ -6,4 +6,4 @@ function doit() {
     } catch (e) {
         console.log(e);
     }
-}
+};
