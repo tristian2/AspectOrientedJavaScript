@@ -1,8 +1,14 @@
 ﻿//Documentation on using Esprima http://esprima.org/doc/index.html#ast
-
 //todo modularise the code so that we can target specific modules!!
 //also modulatrise the sample! use the module pattern http://addyosmani.com/resources/essentialjsdesignpatterns/book/
-    function sourceRewrite() {
+//now cutting over to namespacing
+//Main namespaces
+var Acme = Acme || {};
+Acme.Tools = Acme.Tools || {};
+Acme.Tools.HumanResources = Acme.Tools.HumanResources || {};
+
+
+Acme.Tools.HumanResources.sourceRewrite = function () {
     'use strict';
 
     var code, syntax, indent, quotes, option;
@@ -114,7 +120,6 @@
                 }
 
                 /*if (prop.type == 'CatchClause') {
-                /*if (prop.type == 'CatchClause') {
                     debugger;
                     ids = obj[prop].map(function (elem) {
                         return elem.id;
@@ -137,5 +142,5 @@
 /*jslint sloppy:true browser:true */
 /*global sourceRewrite:true */
 window.onload = function () {
-    sourceRewrite();
+    Acme.Tools.HumanResources.sourceRewrite();
 };
