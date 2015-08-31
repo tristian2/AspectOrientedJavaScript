@@ -35,18 +35,7 @@ namespace LogService.Controllers
             return SingleResult.Create(result);
         }
 
-        //to support the writing of logentries to the entity set
-        public async Task<IHttpActionResult> Post (LogEntry logEntry)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            db.Logs.Add(logEntry);
-            await db.SaveChangesAsync();
-            return Created(logEntry);
  
-        }
 
         //finally to support updating of a record PATCH http verb for updating and PUT for 
         //complete replacement of the entity entirely.  for PATCH the controller uses the Deltat<T>
