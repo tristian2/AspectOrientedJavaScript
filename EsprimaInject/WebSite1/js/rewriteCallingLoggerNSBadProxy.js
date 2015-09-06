@@ -41,6 +41,7 @@ Acme.Tools.HumanResources.sourceRewrite = function () {
     code += "       },";
     code += "       error: function (xhr, ajaxOptions, thrownError) {";
     //code += "           console.log(\"Fail: status:\" + xhr.status);";
+    code += "           $(\"#icon\").attr(\"src\", \"\/\/c1.staticflickr.com\/1\/294\/18789417264_9d8ae67572_b.jpg\");";
     code += "           throw new ConnectionException(\'Weather service not reached\');";   //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/throw
     code += "       },";
     code += "       complete: function () {";
@@ -52,7 +53,7 @@ Acme.Tools.HumanResources.sourceRewrite = function () {
     code += "        console.log(e.message);";
     code += "    }";
     code += "}";
-    code += "function start(message) {";
+    code += "function before(message) {";
     code += "    console.log(\'before advice\');";
     code += "    var url = \"\/\/logservice.azurewebsites.net\/Logs\";";
     code += "    var currentdate = new Date();";
@@ -84,7 +85,7 @@ Acme.Tools.HumanResources.sourceRewrite = function () {
 
 
     code += "}";
-    code += "function end() {";
+    code += "function after() {";
     code += "    console.log(\'after advice\');";
     code += "}";
     code += "WeatherByCity(\"London\", \"uk\");";
@@ -106,8 +107,8 @@ Acme.Tools.HumanResources.sourceRewrite = function () {
         syntax = window.esprima.parse(code, { raw: true, tokens: true, range: true, comment: true });
         syntax = window.escodegen.attachComments(syntax, syntax.comments, syntax.tokens);
         //advice to the entire code
-        syntax.body.unshift(esprima.parse('start()'))  //Parsing and modifying Javascript code with Esprima and Escodegen http://www.mattzeunert.com/2013/12/30/parsing-and-modifying-Javascript-code-with-esprima-and-escodegen.html
-        syntax.body.push(esprima.parse('end()'))
+        syntax.body.unshift(esprima.parse('before()'))  //Parsing and modifying Javascript code with Esprima and Escodegen http://www.mattzeunert.com/2013/12/30/parsing-and-modifying-Javascript-code-with-esprima-and-escodegen.html
+        syntax.body.push(esprima.parse('after()'))
 
         //code = window.escodegen.generate(syntax, option);
         //console.log(code);
@@ -133,8 +134,8 @@ Acme.Tools.HumanResources.sourceRewrite = function () {
                 if (obj.type === 'CatchClause') {  //worked out using the parse tree from http://esprima.org/demo/parse.html and the resultamt AST
                     //debugger;
                     //now inject the code 
-                    obj.body.body.unshift(esprima.parse('start(e.message);'))
-                    obj.body.body.push(esprima.parse('end();'))
+                    obj.body.body.unshift(esprima.parse('before(e.message);'))
+                    obj.body.body.push(esprima.parse('after();'))
                 }
 
                 /*if (prop.type == 'CatchClause') {
