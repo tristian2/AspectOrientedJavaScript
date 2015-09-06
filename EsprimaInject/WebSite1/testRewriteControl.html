@@ -6,21 +6,29 @@
  <!--<![endif]-->
 <head>
     <meta charset="utf-8" />
-    <title>Esprima: Lab 2 - Logging</title>
+    <title>Esprima: Control</title>
     <meta name="viewport" content="width=device-width" />
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="js/esprima.js"></script>
     <script src="js/escodegen.browser.js"></script>
-    <script src="js/rewriteCallingLogger.js"></script>
+    <script src="js/rewriteControl.js"></script>
 </head>
 
 <body>
-    <h1>Code Re-writing, adding advice and logging to a remote service</h1>
+    <h1>Code Re-writing, adding advice and logging to a remote service control.</h1>
+    <h2>A baseline to enable comparison of the service that is not advised or rewritten.</h2>
     <p>
         check in browser console..
     </p>
     <p>
         also <a href="https://logservice.azurewebsites.net/Logs" target="_blank">check the logs</a>
     </p>
+    <p>
+        Weather in London, UK.
+    </p>
+    <div id="result" />
+    <div>
+        <img id="icon" />
+    </div>
 </body>
 </html>

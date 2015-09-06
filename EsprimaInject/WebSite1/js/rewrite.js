@@ -4,6 +4,7 @@
 //also modulatrise the sample! use the module pattern http://addyosmani.com/resources/essentialjsdesignpatterns/book/
 
 var code;
+
 function start() {
     console.log('before advice');
 }
@@ -26,25 +27,14 @@ Function.prototype.call = function () {
     return this.apply(arguments[0], args);
 };
 
-
-
 function UserException(message) {
     this.message = message;
     this.name = 'UserException';
 }
-    function sourceRewrite() {
-    //'use strict';
+function sourceRewrite() {
 
-    //var code, syntax, indent, quotes, option;
     var syntax, indent, quotes, option;
-    /*function doit() {  
-        console.log('in function');
-        try {
-            console.log('in try');
-        } catch (e) {
-            console.log(e);
-        }
-    }*/
+
     code = "function UserException(message) {";
     code += "this.message = message;";
     code += "    this.name = \'UserException\';";
@@ -66,7 +56,7 @@ function UserException(message) {
     code += "    console.log(\'after advice\');";
     code += "}";
     code += "doit();";
-    
+
     indent = '\t';
     quotes = 'auto';
 
@@ -81,28 +71,17 @@ function UserException(message) {
     };
 
     try {
-        //syntax = window.esprima.parse(code, { raw: true, tokens: true, range: true, comment: true });
-        
-        //syntax = window.esprima.parse(String(window.sourceRewrite), { raw: true, tokens: true, range: true, comment: true });   //get the source of the functions to be decorated into a string
-        syntax = window.esprima.parse(String(window.doit), { raw: true, tokens: true, range: true, comment: true });   //get the source of the functions to be decorated into a string
+        syntax = window.esprima.parse(code, { raw: true, tokens: true, range: true, comment: true });   //get the source of the functions to be decorated into a string
         syntax = window.escodegen.attachComments(syntax, syntax.comments, syntax.tokens);
         //advice to the entire code
-       // syntax.body.unshift(esprima.parse('start()'))  //Parsing and modifying Javascript code with Esprima and Escodegen http://www.mattzeunert.com/2013/12/30/parsing-and-modifying-Javascript-code-with-esprima-and-escodegen.html
+        //syntax.body.unshift(esprima.parse('start()'))  //Parsing and modifying Javascript code with Esprima and Escodegen http://www.mattzeunert.com/2013/12/30/parsing-and-modifying-Javascript-code-with-esprima-and-escodegen.html
         //syntax.body.push(esprima.parse('end()'))
 
-        //code = window.escodegen.generate(syntax, option);
-        //console.log(code);
         traverse(syntax);
         code = window.escodegen.generate(syntax, option);
         console.log(code);
         debugger;
         eval(code);
-        
-                
-        //var doit = new Function(code);
-
-        
-        
         throw new UserException('TestExceptionException');
     } catch (e) {
         console.log(e.message.toString());
@@ -117,7 +96,7 @@ function UserException(message) {
 
             //console.log(typeof obj[prop] + '    ' + prop);
             if (typeof obj[prop] == "object" && obj[prop]) {
-                
+
                 //console.log(obj.type);
                 if (obj.type === 'CatchClause') {  //worked out using the parse tree from http://esprima.org/demo/parse.html and the resultamt AST
                     //debugger;
@@ -126,11 +105,11 @@ function UserException(message) {
                     obj.body.body.push(esprima.parse('end();'))
                 }
 
-          /*      if (prop.type == 'CatchClause') {
-                    debugger;
-                    ids = obj[prop].map(function (elem) {
-                        return elem.id;
-                    })
+                /*      if (prop.type == 'CatchClause') {
+                debugger;
+                ids = obj[prop].map(function (elem) {
+                return elem.id;
+                })
                 }
                 ids = ids.concat(traverse(obj[prop]));*/
                 ids = ids.concat(traverse(obj[prop]));
@@ -139,16 +118,7 @@ function UserException(message) {
         //return ids;
     }
 
-    //var ids = traverse(syntax);
-//    traverse(syntax);
-    //console.log('ids', ids);
-
-
 }
-    sourceRewrite();
-    doit();
-/*jslint sloppy:true browser:true */
-/*global sourceRewrite:true */
-/*window.onload = function () {
-    sourceRewrite();
-};*/
+sourceRewrite();
+doit();
+
